@@ -1,0 +1,10 @@
+/* Estilos específicos da página inicial */
+
+/* Container da página inicial */
+.container p {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 30px;
+}

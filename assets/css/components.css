@@ -1,0 +1,98 @@
+/* Componentes reutilizáveis */
+
+/* Campos de formulário */
+.nome, .email, .senha {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nome label, .email label, .senha label {
+    font-size: 1.2rem;
+    padding: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.nome input, .email input, .senha input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #e1e5e9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.nome input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.nome input:hover, .email input:hover, .senha input:hover {
+    border-color: #141415;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nome input::placeholder, .email input::placeholder, .senha input::placeholder {
+    color: #999;
+    font-weight: 400;
+}
+
+/* Botão de formulário */
+.form-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.form-button button {
+    width: 200px;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: #1e40af;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.form-button button:hover {
+    background-color: #3730a3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Links */
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.links a:hover {
+    color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}

@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Por favor, preencha todos os campos');
                 return;
             }
-            SubmitForm(email,password);
+            
+            // Se tudo estiver válido, enviar o formulário
+            form.submit();
         });
     }   
 });

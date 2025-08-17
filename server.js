@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000; // Define a porta do servidor
 app.use(express.json()); // Middleware para lidar com JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para lidar com formulários
 
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/auth', authRoutes); // Usa as rotas de autenticação
 
 // Rota para a página inicial
@@ -36,4 +38,3 @@ app.get('/dashboard', (req, res)=>{
 app.listen(PORT, ()=>{
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-

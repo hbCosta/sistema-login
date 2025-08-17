@@ -19,5 +19,15 @@ router.post('/register', async(req, res)=>{
     }
 });
 
-module.exports = router;
+router.post('/login', async(req, res)=>{
+    try{
+        const{email, senha} = req.body;
+        console.log('Tentativa de login:', email);
+        res.redirect('/dashboard');
+    }catch(error){
+        console.error('Erro ao fazer login:', error);
+        res.status(500).json({error: 'Erro ao fazer login'});
+    }
+});
 
+module.exports = router;

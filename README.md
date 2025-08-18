@@ -97,4 +97,4 @@ ISC
 
 ---
 
-Desenvolvido com ❤️ usando Node.js e Express
+Desenvolvido  usando Node.js e Express

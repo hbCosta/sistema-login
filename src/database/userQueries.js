@@ -1,7 +1,7 @@
 
 const pool = require('../config/connection'); // Importa a conexão com o bacno de dados
 
-const insertUser = async (nome, nascimento, email, senha) =>{
+const insertUser = async (nome, nascimento, email, senha) => {
     const query = 'INSERT INTO users (nome, email, senha, data_de_nascimento) VALUES (?, ?, ?, ?)';
     const values = [nome, email, senha, nascimento];
 
@@ -13,4 +13,30 @@ const insertUser = async (nome, nascimento, email, senha) =>{
     }
 };
 
-module.exports = {insertUser};
+const buscarUsuarioPorEmail = async (email) =>{
+    const query= 'SELECT * FROM users WHERE email = ?';
+    const values = [email];
+    try{
+        const [resultado] = await pool.execute(query, values);
+        return resultado[0];
+    }catch(error){
+        throw error;
+    }
+};
+
+const buscarId = async (id) =>{
+    const query = 'SELECT * FROM users WHERE id = ?';
+    const values = [id];
+    try{
+        const [resultado] = await pool.execute(query, values);
+        return resultado[0];
+    }catch(error){
+        throw error;
+    }
+};
+
+module.exports = {
+    insertUser,
+    buscarUsuarioPorEmail,
+    buscarId
+};

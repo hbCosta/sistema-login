@@ -1,11 +1,20 @@
 require('dotenv').config(); // Carrega as variáveis de ambiente
 
 const express = require('express'); // Importa o express
+const session = require('express-session');
 const path = require('path'); // Importa o path
 const authRoutes = require('./src/routes/auth'); // Importa as rotas de autenticação
 
 const app = express(); // Cria uma instância do express
 const PORT = process.env.PORT || 3000; // Define a porta do servidor
+
+app.use(session({
+    secret: 'sistema_login_2024',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // false para desenvolvimento
+}));
+
 
 app.use(express.json()); // Middleware para lidar com JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para lidar com formulários

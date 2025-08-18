@@ -29,13 +29,14 @@ body{
     position: relative;
 }
 
+
 .header h1{
     font-size: 2.2rem;
     font-weight: 600;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-.header .btn-danger {
+.logout-container .btn-danger {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -48,8 +49,9 @@ body{
     font-size: 14px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    cursor:pointer;
 }
-.header .btn-danger:hover {
+.logout-container .btn-danger:hover {
     background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(211, 47, 47, 0.5);

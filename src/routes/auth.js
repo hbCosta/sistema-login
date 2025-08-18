@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const{insertUser} = require('../database/userQueries');
+const{insertUser, buscarUsuarioPorEmail, buscarId} = require('../database/userQueries');
 
 router.post('/register', async(req, res)=>{
     try{
@@ -23,11 +23,46 @@ router.post('/login', async(req, res)=>{
     try{
         const{email, senha} = req.body;
         console.log('Tentativa de login:', email);
+        const usuario = await buscarUsuarioPorEmail(email);
+        if(!usuario){
+            return res.status(401).json({error: 'Email inválido'});
+        }
+        req.session.usuarioId = usuario.id; 
+        console.log('Login realizado com sucesso');
         res.redirect('/dashboard');
     }catch(error){
         console.error('Erro ao fazer login:', error);
         res.status(500).json({error: 'Erro ao fazer login'});
     }
 });
+
+router.get('/usuario-atual', async(req, res) =>{
+    try{
+        const usuarioId = req.session.usuarioId; 
+        const usuario = await buscarId(usuarioId); 
+        res.json({
+            nome: usuario.nome,
+            nascimento: usuario.data_de_nascimento, 
+            email: usuario.email
+        })
+    }catch(error){
+        console.error('Erro ao buscar usuário:', error);
+        res.status(500).json({error: 'Erro ao buscar usuário'});
+    }
+});
+
+router.get('/logout', (req, res) =>{
+    req.session.destroy(); 
+    res.redirect('/login');
+});
+
+
+router.get('/usuario-atual', (req, res) =>{
+    res.json({
+        nome: usuario.nome,
+        nascimento: usuario.nascimento,
+        email: usuario.email
+    })
+})
 
 module.exports = router;

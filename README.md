@@ -32,7 +32,7 @@ sistema-login/
 
 1. Clone o repositório:
 ```bash
-git clone [url-do-repositorio]
+git clone https://github.com/hbCosta/sistema-login.git
 cd sistema-login
 ```
 
@@ -97,4 +97,4 @@ ISC
 
 ---
 
-Desenvolvido com ❤️ usando Node.js e Express
+Desenvolvido  usando Node.js e Express

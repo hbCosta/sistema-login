@@ -2,12 +2,22 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const bcrypt = require('bcrypt'); // Importa o bcrypt
 const{insertUser, buscarUsuarioPorEmail, buscarId} = require('../database/userQueries');
+const {validarSenha} = require('../utils/passwordValidation');
 
 router.post('/register', async(req, res)=>{
     try{
         const{nome, nascimento, email, senha} = req.body;
-        const result = await insertUser(nome, nascimento, email, senha);
+
+        const validacaoSenha = validarSenha(senha);
+        if(!validacaoSenha.valida){
+            return res.status(400).json({error: validacaoSenha.erro});
+        }
+        const saltRounds = 10; // Define o número de rounds para a hash
+        const senhaHash = await bcrypt.hash(senha, saltRounds); // Gera a hash da senha
+
+        const result = await insertUser(nome, nascimento, email, senhaHash);
         console.log('Usuário registrado com sucesso');
         res.redirect('/login');
     }catch(error){
@@ -27,9 +37,15 @@ router.post('/login', async(req, res)=>{
         if(!usuario){
             return res.status(401).json({error: 'Email inválido'});
         }
+
+        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+        if(!senhaValida){
+            return res.status(401).json({error: 'Senha inválida'});
+        }
+
         req.session.usuarioId = usuario.id; 
         console.log('Login realizado com sucesso');
-        res.redirect('/dashboard');
+        res.json({success:true});
     }catch(error){
         console.error('Erro ao fazer login:', error);
         res.status(500).json({error: 'Erro ao fazer login'});
@@ -56,13 +72,5 @@ router.get('/logout', (req, res) =>{
     res.redirect('/login');
 });
 
-
-router.get('/usuario-atual', (req, res) =>{
-    res.json({
-        nome: usuario.nome,
-        nascimento: usuario.nascimento,
-        email: usuario.email
-    })
-})
 
 module.exports = router;

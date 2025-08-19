@@ -96,3 +96,21 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+.alert {
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 0;
+    font-weight: 600;
+    display:none;
+}
+
+.alert.show{
+    display: block;
+}
+.alert-error{
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+

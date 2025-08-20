@@ -12,7 +12,9 @@ Permite que usuários se cadastrem, façam login e acessem seu dashboard.
 - **Backend**: Node.js + Express.js
 - **Banco de Dados**: MySQL
 - **Frontend**: HTML, CSS, JavaScript
-- **Outras**: dotenv
+- **Segurança**: bcrypt (hash de senhas)
+- **Validação**: Express-validator
+- **Outras**: dotenv, express-session
 
 ## 📁 Estrutura do Projeto
 
@@ -22,7 +24,8 @@ sistema-login/
 ├── src/              # Código fonte do servidor
 │   ├── config/       # Configurações (banco de dados)
 │   ├── database/     # Queries do banco
-│   └── routes/       # Rotas da aplicação
+│   ├── routes/       # Rotas da aplicação
+│   └── utils/        # Utilitários (validação de senha)
 ├── views/            # Páginas HTML
 ├── server.js         # Servidor principal
 └── package.json      # Dependências do projeto
@@ -65,31 +68,39 @@ node server.js
 - **GET /login** - Página de login
 - **GET /register** - Página de registro
 - **GET /dashboard** - Área restrita (após login)
-- **POST /auth/register** - Endpoint para registro
-- **POST /auth/login** - Endpoint para autenticação
+- **POST /auth/register** - Endpoint para registro (com validação de senha)
+- **POST /auth/login** - Endpoint para autenticação (com verificação de hash)
+- **GET /auth/usuario-atual** - Dados do usuário logado
+- **GET /auth/logout** - Logout do usuário
 
 ## ✨ Funcionalidades
 
 - ✅ Registro de usuários
-- ✅ Sistema de login
+- ✅ Sistema de login seguro
+- ✅ Validação robusta de senha
+- ✅ Hash de senhas com bcrypt
 - ✅ Validação de email único
 - ✅ Área restrita (dashboard)
+- ✅ Sistema de sessões
+- ✅ Logout funcional
 - ✅ Conexão com banco MySQL
 
 ## 📝 Status do Projeto
 
-- **Versão**: 1.0.0
-- **Status**: Em desenvolvimento
+- **Versão**: 2.0.0
+- **Status**: Funcional
 - **Funcionalidades básicas**: Implementadas
-- **Autenticação**: Implementada (básica)
+- **Autenticação**: Implementada (segura)
+- **Validação de senha**: Implementada
+- **Segurança**: Hash bcrypt implementado
 
 ## 🔧 Próximos Passos
 - [ ] Interface responsiva 
-- [ ] Implementar sessões de usuário
-- [ ] Adicionar validação de senha
-- [ ] Implementar logout
-- [ ] Adicionar middleware de autenticação
-- [ ] Melhorar segurança
+- [ ] Alertas visuais para erros
+- [ ] Recuperação de senha
+- [ ] Middleware de autenticação
+- [ ] Logs de segurança
+- [ ] Testes automatizados
 
 ## 📄 Licença
 

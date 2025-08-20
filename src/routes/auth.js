@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcrypt'); // Importa o bcrypt
-const{insertUser, buscarUsuarioPorEmail, buscarId} = require('../database/userQueries');
+const{insertUser, buscarUsuarioPorEmail, buscarId, atualizarUsuario} = require('../database/userQueries');
 const {validarSenha} = require('../utils/passwordValidation');
 
 router.post('/register', async(req, res)=>{
@@ -64,6 +64,24 @@ router.get('/usuario-atual', async(req, res) =>{
     }catch(error){
         console.error('Erro ao buscar usuário:', error);
         res.status(500).json({error: 'Erro ao buscar usuário'});
+    }
+});
+
+router.put('/atualizar-usuario', async(req, res)=>{
+    try {
+        const usuarioId = req.session.usuarioId;
+        const{nome, nascimento, email} = req.body;
+
+        const result = await atualizarUsuario(usuarioId, nome, nascimento, email);
+        
+        if(result.rowsAffected > 0){
+            res.json({success:true, message: 'Usuário atualizado com sucesso'});
+        }else{
+            res.status(400).json({error: 'Nenhuma alteração foi feita'});
+        }
+    }catch(error){
+        console.error('Erro ao atualizar usuário:', error);
+        res.status(500).json({error: 'Erro ao atualizar usuário'});
     }
 });
 

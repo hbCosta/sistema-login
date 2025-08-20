@@ -35,8 +35,20 @@ const buscarId = async (id) =>{
     }
 };
 
+const atualizarUsuario = async (id, nome, nascimento, email) => {
+    const query = 'UPDATE users SET nome = ?, data_de_nascimento = ?, email = ? WHERE id = ?';
+    const values = [nome, nascimento, email, id];
+    try{
+        const [resultado] = await pool.execute(query, values);
+        return {success: true, rowsAffected: resultado.affectedRows};
+    }catch(error){
+        throw error;
+    }
+}
+
 module.exports = {
     insertUser,
     buscarUsuarioPorEmail,
-    buscarId
+    buscarId,
+    atualizarUsuario    
 };
